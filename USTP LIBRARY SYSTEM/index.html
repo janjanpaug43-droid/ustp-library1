@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>USTP Library System</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="ustp1.jpg" />
+  </head>
+  <body>
+    <a
+      class="skip"
+      href="#"
+      onclick="
+        document.getElementById('main').focus();
+        return false;
+      "
+      >Skip to content</a
+    >
+    <div class="app">
+      <nav class="side" id="nav" aria-label="Main"></nav>
+      <main>
+        <header class="top">
+          <label class="sb">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              aria-hidden="true"
+            >
+              <circle cx="11" cy="11" r="7" />
+              <path d="M20 20l-4-4" />
+            </svg>
+            <input
+              id="q"
+              type="search"
+              placeholder="Search title, author, or book ID"
+              aria-label="Search books"
+            />
+          </label>
+          <a class="ib" href="#notifications" aria-label="Notifications">
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M6 17V11a6 6 0 0112 0v6l2 2H4z" />
+              <path d="M10 21h4" />
+            </svg>
+            <span class="dot" id="bdot" style="display: none"></span>
+          </a>
+          <div class="me">
+            <a
+              class="av"
+              id="uav"
+              href="#profile"
+              title="My profile"
+              aria-label="My profile"
+              >JA</a
+            >
+            <div>
+              <strong id="un">John Albert</strong><br /><span
+                id="ur"
+                style="color: var(--mut)"
+                >Student</span
+              >
+            </div>
+          </div>
+          <button
+            class="ib"
+            data-a="logout"
+            data-id=""
+            aria-label="Log out"
+            title="Log out"
+            style="cursor: pointer"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M9 4H5v16h4" />
+              <path d="M16 8l4 4-4 4" />
+              <path d="M20 12H9" />
+            </svg>
+          </button>
+        </header>
+        <div id="main" tabindex="-1"></div>
+      </main>
+    </div>
+
+    <div id="toast" role="status" aria-live="polite"></div>
+
+    <div id="md" role="dialog" aria-modal="true" aria-label="Book details">
+      <div class="mc" id="mdb"></div>
+    </div>
+
+    <!-- LOGIN / SIGN UP / FORGOT PASSWORD -->
+    <div id="login">
+      <section class="lleft">
+        <img src="ustp1.jpg" alt="USTP logo" class="llogo" />
+        <h1>USTP Library System</h1>
+        <span class="bar"></span>
+      </section>
+
+      <section class="lright">
+        <div class="lform">
+          <div id="v-login">
+            <h2>Login</h2>
+            <p class="sub">Please sign in to continue</p>
+            <label for="lu">Username</label>
+            <input
+              id="lu"
+              class="in"
+              placeholder="Enter username"
+              autocomplete="username"
+            />
+            <label for="lp">Password</label>
+            <input
+              id="lp"
+              class="in"
+              type="password"
+              placeholder="Enter password"
+              autocomplete="current-password"
+            />
+            <div class="lrow">
+              <label class="chk"
+                ><input
+                  type="checkbox"
+                  onchange="
+                    document.getElementById('lp').type = this.checked
+                      ? 'text'
+                      : 'password'
+                  "
+                />
+                Show password</label
+              >
+              <button class="link" data-a="show" data-id="forgot">
+                Forgot password?
+              </button>
+            </div>
+            <div class="lrow">
+              <label class="chk"
+                ><input type="checkbox" id="lrem" /> Remember me</label
+              >
+            </div>
+            <p class="err" id="lerr" role="alert"></p>
+            <button class="btn go" data-a="login" data-id="">Login</button>
+            <p class="alt">
+              No account yet?
+              <button class="link" data-a="show" data-id="signup">
+                Create account
+              </button>
+            </p>
+          </div>
+
+          <div id="v-signup" style="display: none">
+            <h2>Create account</h2>
+            <p class="sub">
+              Student sign up only. Sign up once, then use it to log in.
+            </p>
+            <label for="sn">Full name</label>
+            <input
+              id="sn"
+              class="in"
+              placeholder="Enter full name"
+              autocomplete="name"
+            />
+            <label for="su">Username</label>
+            <input
+              id="su"
+              class="in"
+              placeholder="Choose a username"
+              autocomplete="username"
+            />
+            <label for="sr">Role</label>
+            <select id="sr" class="in">
+              <option>Student</option>
+            </select>
+            <label for="sp">Password</label>
+            <input
+              id="sp"
+              class="in"
+              type="password"
+              placeholder="At least 4 characters"
+              autocomplete="new-password"
+            />
+            <label for="sp2">Confirm password</label>
+            <input
+              id="sp2"
+              class="in"
+              type="password"
+              placeholder="Type the password again"
+              autocomplete="new-password"
+            />
+            <p class="err" id="serr" role="alert"></p>
+            <button class="btn go" data-a="signup" data-id="">
+              Create account
+            </button>
+            <p class="alt">
+              Already have an account?
+              <button class="link" data-a="show" data-id="login">Login</button>
+            </p>
+          </div>
+
+          <div id="v-forgot" style="display: none">
+            <h2>Reset password</h2>
+            <p class="sub">Enter your username and a new password.</p>
+            <label for="fu">Username</label>
+            <input id="fu" class="in" placeholder="Enter username" />
+            <label for="fp">New password</label>
+            <input
+              id="fp"
+              class="in"
+              type="password"
+              placeholder="At least 4 characters"
+              autocomplete="new-password"
+            />
+            <p class="err" id="ferr" role="alert"></p>
+            <button class="btn go" data-a="forgot" data-id="">
+              Save new password
+            </button>
+            <p class="alt">
+              <button class="link" data-a="show" data-id="login">
+                Back to login
+              </button>
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script src="db.js"></script>
+  </body>
+</html>
